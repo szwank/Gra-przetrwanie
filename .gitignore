@@ -24,6 +24,8 @@ wheels/
 .installed.cfg
 *.egg
 MANIFEST
+projekt_PO_wirtualny_swiat_2017-2.pdf
+Main/.idea/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
