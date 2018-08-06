@@ -1,5 +1,8 @@
 class World:
 
+#    organisms
+
+
     def __init__(self):
         pass
 
@@ -9,4 +12,6 @@ class World:
     def makeTurn(self):
         pass
 
-    object
+
+
+
