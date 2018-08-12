@@ -30,7 +30,7 @@ def check_if_string_contains_only_number(string):
     return str.isdigit(string)
 
 
-
+#yuguy
 def main()
 
     input_window = GraphWin("Pobranie wymiarów okna", 400,200) #stworzenie okna do podania wymiarów
