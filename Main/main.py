@@ -54,7 +54,7 @@ print(line.getP1())
 
 time.sleep(10)
 '''
-input_window = GraphWin("Pobranie wymiarów okna", 400,100) #stworzenie okna do podania wymiarów
+input_window = GraphWin("Pobranie wymiarów okna", 400,200) #stworzenie okna do podania wymiarów
 
 display_message_point = Point(input_window.getWidth() / 2, input_window.getHeight() / 2)
 message = Text(display_message_point, 'Podaj ilość pól szerokości gry:')
