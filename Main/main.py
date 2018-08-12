@@ -30,58 +30,46 @@ def check_if_string_contains_only_number(string):
     return str.isdigit(string)
 
 
-'''win = GraphWin()
-pt = Point(100, 50)
-pt.draw(win)
 
-cir = Circle(pt, 25)
-cir.draw(win)
+def main()
 
-cir.setOutline('red')
-cir.setFill('blue')
+    input_window = GraphWin("Pobranie wymiarów okna", 400,200) #stworzenie okna do podania wymiarów
 
-line = Line(pt, Point(150, 100))
-line.draw(win)
-
-time.sleep(5)
-
-pt.x=50
-print(line.getP1())
-
-time.sleep(10)
-'''
-input_window = GraphWin("Pobranie wymiarów okna", 400,200) #stworzenie okna do podania wymiarów
-
-display_message_point = Point(input_window.getWidth() / 2, input_window.getHeight() / 2)
-message = Text(display_message_point, 'Podaj ilość pól szerokości gry:')
-message.draw(input_window)
-input_message = get_input_massage(input_window, Point(display_message_point.getX() + len(message.getText()) * 4.5,
-                                              display_message_point.getY()))
-message.undraw()
-
-
-while check_if_string_contains_only_number(input_message) is False: #odpalenie pętli jeżeli string nie zawierał tylko cyfr
-
-    message.setText('Wiadomość zawierała znaki nie będące cyframi! Wciśnij enter by kontynuować')
-    wait_to_press_key(input_window, 'Return')
-
+    display_message_point = Point(input_window.getWidth() / 2, input_window.getHeight() / 2)
+    message = Text(display_message_point, 'Podaj ilość pól szerokości gry:')
     message.draw(input_window)
-    input = get_input_massage(input_window, Point(display_message_point.getX() + len(message.getText()) * 4.5,
+    input_message = get_input_massage(input_window, Point(display_message_point.getX() + len(message.getText()) * 4.5,
                                                   display_message_point.getY()))
     message.undraw()
 
 
-print(input)
+    while check_if_string_contains_only_number(input_message) is False: #odpalenie pętli jeżeli string nie zawierał tylko cyfr
+
+        message.setText('Wiadomość zawierała znaki nie będące cyframi! Wciśnij enter by kontynuować')
+        wait_to_press_key(input_window, 'Return')
+
+        message.draw(input_window)
+        input = get_input_massage(input_window, Point(display_message_point.getX() + len(message.getText()) * 4.5,
+                                                      display_message_point.getY()))
+        message.undraw()
 
 
-# input_window.getMouse()
-# input_max_x.close()
+    print(input)
 
-# window = World(1000,500)
-# while 1:
-#     window.window.update()
-# window.window.getMouse()
-# window.window.close()
-print('kot')
+    # input_window.getMouse()
+    # input_max_x.close()
+
+    # window = World(1000,500)
+    # while 1:
+    #     window.window.update()
+    # window.window.getMouse()
+    # window.window.close()
+    print('kot')
+
+
+main()
+
+
+
 
 
