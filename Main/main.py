@@ -27,11 +27,7 @@ def get_input_massage(window, entry_position, font_size = 5):
 
 def check_if_string_contains_only_number(string):
     '''Sprawdz czy podany string posiada tylko czyfry'''
-
-    if str.isdigit(string) == True:
-        return string
-    else:
-        return None
+    return str.isdigit(string)
 
 
 '''win = GraphWin()
@@ -64,7 +60,7 @@ input_message = get_input_massage(input_window, Point(display_message_point.getX
 message.undraw()
 
 
-while check_if_string_contains_only_number(input_message) is None: #odpalenie pętli jeżeli string nie zawierał tylko cyfr
+while check_if_string_contains_only_number(input_message) is False: #odpalenie pętli jeżeli string nie zawierał tylko cyfr
 
     message.setText('Wiadomość zawierała znaki nie będące cyframi! Wciśnij enter by kontynuować')
     wait_to_press_key(input_window, 'Return')
