@@ -1,56 +1,27 @@
 from graphics import *
 import time
 from world import World
+from init_window import InitWindow
 
+def main():
+    init_window = InitWindow()
 
-def wait_to_press_key(window, key):
-    '''Czekaj aż zostanie wciśnięty klawisz 'key', w onie 'window' '''
-
-    key_pressed = window.checkKey()
-    while key_pressed != key:
-        key_pressed = window.checkKey()
-
-
-def get_input_massage(window, entry_position, font_size = 5):
-    '''Pobierz wiadomość i potwierdz wiadomość
-    okno do pobrania wiadomości zostanie wyświetlone w punkcie 'entry_position'(podany przez klase Point) '''
-
-    input_message = Entry(entry_position, font_size)
-    input_message.draw(input_window)
-
-    wait_to_press_key(window, 'Return') #czekaj na potwierdzenie tekstu klawiszem Enter
-
-    input_message.undraw()
-
-    return input_message.getText()
-
-
-def check_if_string_contains_only_number(string):
-    '''Sprawdz czy podany string posiada tylko czyfry'''
-    return str.isdigit(string)
-
-
-#yuguy
-def main()
-
-    input_window = GraphWin("Pobranie wymiarów okna", 400,200) #stworzenie okna do podania wymiarów
-
-    display_message_point = Point(input_window.getWidth() / 2, input_window.getHeight() / 2)
+    display_message_point = Point(init_window.get_wight() / 2, init_window.get_height() / 2)
     message = Text(display_message_point, 'Podaj ilość pól szerokości gry:')
-    message.draw(input_window)
-    input_message = get_input_massage(input_window, Point(display_message_point.getX() + len(message.getText()) * 4.5,
+    init_window.display_message(message)
+    input_message = init_window.get_input_massage(Point(display_message_point.getX() + len(message.getText()) * 4.5,
                                                   display_message_point.getY()))
-    message.undraw()
+    init_window.hide_message(message)
 
 
-    while check_if_string_contains_only_number(input_message) is False: #odpalenie pętli jeżeli string nie zawierał tylko cyfr
+    while str.isdigit(input_message) is False: #odpalenie pętli jeżeli string nie zawierał tylko cyfr
 
         message.setText('Wiadomość zawierała znaki nie będące cyframi! Wciśnij enter by kontynuować')
-        wait_to_press_key(input_window, 'Return')
+        init_window.wait_to_press_key('Return')
 
-        message.draw(input_window)
-        input = get_input_massage(input_window, Point(display_message_point.getX() + len(message.getText()) * 4.5,
-                                                      display_message_point.getY()))
+        init_window.display_message(message)
+        input_message = init_window.get_input_massage(Point(display_message_point.getX() + len(message.getText()) * 4.5,
+                                                            display_message_point.getY()))
         message.undraw()
 
 

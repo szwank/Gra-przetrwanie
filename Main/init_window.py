@@ -6,7 +6,9 @@ class InitWindow:
     __ENTER_KEY = 'Return'
 
     def __init__(self, wight=400, height=200):
-        self.window_handle = GraphWin(self.__WINDOW_NAME, wight, height)
+        self.wight = wight
+        self.height = height
+        self.window_handle = GraphWin(self.__WINDOW_NAME, wight, height) #zainicjowanie okna
 
     def wait_to_press_key(self, key):
         '''Czekaj aż zostanie wciśnięty klawisz 'key' '''
@@ -22,7 +24,7 @@ class InitWindow:
         input_message = Entry(entry_position, font_size)
         input_message.draw(self.window_handle)
 
-        self.wait_to_press_key(self.window_handle, self.__ENTER_KEY)  # czekaj na potwierdzenie tekstu klawiszem Enter
+        self.wait_to_press_key(self.__ENTER_KEY)  # czekaj na potwierdzenie tekstu klawiszem Enter
 
         input_message.undraw()
 
@@ -35,4 +37,10 @@ class InitWindow:
     def hide_message(self, message):
         '''Ukryj wiadokość klasy Text'''
         message.undraw(self.window_handle)
+
+    def get_wight(self):
+        return self.wight
+
+    def get_height(self):
+        return self.height
 
