@@ -3,6 +3,7 @@ import time
 from world import World
 from init_window import InitWindow
 
+
 def main():
     init_window = InitWindow()
 
@@ -10,11 +11,10 @@ def main():
     message = Text(display_message_point, 'Podaj ilość pól szerokości gry:')
     init_window.display_message(message)
     input_message = init_window.get_input_massage(Point(display_message_point.getX() + len(message.getText()) * 4.5,
-                                                  display_message_point.getY()))
+                                                        display_message_point.getY()))
     init_window.hide_message(message)
 
-
-    while str.isdigit(input_message) is False: #odpalenie pętli jeżeli string nie zawierał tylko cyfr
+    while str.isdigit(input_message) is False:  # odpalenie pętli jeżeli string nie zawierał tylko cyfr
 
         message.setText('Wiadomość zawierała znaki nie będące cyframi! Wciśnij enter by kontynuować')
         init_window.wait_to_press_key('Return')
@@ -23,7 +23,6 @@ def main():
         input_message = init_window.get_input_massage(Point(display_message_point.getX() + len(message.getText()) * 4.5,
                                                             display_message_point.getY()))
         message.undraw()
-
 
     print(input)
 
@@ -39,8 +38,3 @@ def main():
 
 
 main()
-
-
-
-
-
