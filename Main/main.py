@@ -13,7 +13,7 @@ def main():
     print('szerokość: ' + width + ', wysokość: ' + height)
 
     world = World(int(width), int(height))
-    world.draw_and_display_board()
+    world.display_board()
 
     world.wait_to_press_key('Return')
     # input_window.getMouse()
