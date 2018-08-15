@@ -8,10 +8,14 @@ def main():
     init_window = WindowInitializer()
     width = init_window.ask_about_number('Podaj ilość pól szerokości gry:')
     height = init_window.ask_about_number('Podaj ilość pól wysokość gry:')
-    del init_window
+    init_window.close_window()
 
     print('szerokość: ' + width + ', wysokość: ' + height)
 
+    world = World(int(width), int(height))
+    world.draw_and_display_board()
+
+    world.wait_to_press_key('Return')
     # input_window.getMouse()
     # input_max_x.close()
 

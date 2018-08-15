@@ -10,8 +10,11 @@ class WindowInitializer:
         self.height = height
         self.window_handle = GraphWin(self.__WINDOW_NAME, width, height)  # zainicjowanie okna
 
-    def __del__(self):
+    def close_window(self):
+        """Zamknięcie okna"""
+
         self.window_handle.close()
+
 
     def wait_to_press_key(self, key):
         """Czekaj aż zostanie wciśnięty klawisz 'key' """
