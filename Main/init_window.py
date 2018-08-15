@@ -1,14 +1,17 @@
 from graphics import *
 
 
-class InitWindow:
+class WindowInitializer:
     __WINDOW_NAME = 'Pobranie wymiarów planszy'
     __ENTER_KEY = 'Return'
 
-    def __init__(self, wight=400, height=200):
-        self.wight = wight
+    def __init__(self, width=400, height=200):
+        self.width = width
         self.height = height
-        self.window_handle = GraphWin(self.__WINDOW_NAME, wight, height)  # zainicjowanie okna
+        self.window_handle = GraphWin(self.__WINDOW_NAME, width, height)  # zainicjowanie okna
+
+    def __del__(self):
+        self.window_handle.close()
 
     def wait_to_press_key(self, key):
         """Czekaj aż zostanie wciśnięty klawisz 'key' """
@@ -23,6 +26,7 @@ class InitWindow:
         """
 
         input_message = Entry(entry_position, font_size)
+        input_message.setText(0)
         input_message.draw(self.window_handle)
 
         self.wait_to_press_key(self.__ENTER_KEY)  # czekaj na potwierdzenie tekstu klawiszem Enter
@@ -38,23 +42,23 @@ class InitWindow:
         message.draw(self.window_handle)
 
     def hide_message(self, message):
-        """Ukryj wiadokość klasy Text
+        """Ukryj wiadomość klasy Text
         """
 
         message.undraw()
 
-    def get_wight(self):
-        return self.wight
+    def get_widht(self):
+        return self.width
 
     def get_height(self):
         return self.height
 
-    def ask_about_the_size_of_the_board(self):
+    def ask_about_number(self, ask_message):
         """Tworzy okno w którym pyta użytkownika o wymiary głównej planszy
         """
 
-        display_message_point = Point(self.get_wight() / 2, self.get_height() / 2)
-        message = Text(display_message_point, 'Podaj ilość pól szerokości gry:')
+        display_message_point = Point(self.get_widht() / 2, self.get_height() / 2)
+        message = Text(display_message_point, ask_message)
         self.display_message(message)
         input_message = self.get_input_massage(Point(display_message_point.getX() + len(message.getText()) * 4.5,
                                                      display_message_point.getY()))
@@ -62,10 +66,12 @@ class InitWindow:
 
         while str.isdigit(input_message) is False:  # odpalenie pętli jeżeli string nie zawierał tylko cyfr
 
-            message.setText('Wiadomość zawierała znaki nie będące cyframi! Wciśnij enter by kontynuować')
+            message.setText('Wiadomość zawierała znaki nie będące cyframi!\nWciśnij Enter by kontynuować')
+            self.display_message(message)
             self.wait_to_press_key('Return')
 
-            self.display_message(message)
+
+            message.setText(ask_message)
             input_message = self.get_input_massage(Point(display_message_point.getX() + len(message.getText()) * 4.5,
                                                          display_message_point.getY()))
             message.undraw()
