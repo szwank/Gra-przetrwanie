@@ -1,6 +1,7 @@
 from graphics import *
 from graphic_object_creator import GraphicObjectCreator
-
+import random
+from organism import Organism
 
 class World:
     __CONSOLE_WIDTH = 300
@@ -15,9 +16,11 @@ class World:
         self.__WIDTH = width_of_the_board_in_the_fields * self.__FIELD_SIZE + self.__CONSOLE_WIDTH
         self.__HEIGHT = the_height_of_the_board_in_the_fields * self.__FIELD_SIZE
 
-        self.window_handle = GraphWin(self.__WINDOW_NAME, self.__WIDTH, self.__HEIGHT)
+        self.__WINDOW_HANDLE = GraphWin(self.__WINDOW_NAME, self.__WIDTH, self.__HEIGHT)
 
         self.grafic_object_creator = GraphicObjectCreator(self.__HEIGHT)
+
+        random.seed()
 
     def draw_world(self):
         pass
@@ -64,7 +67,7 @@ class World:
 
     def display_object(self, object):
         """Wyświetla obiekt Line"""
-        object.draw(self.window_handle)
+        object.draw(self.__WINDOW_HANDLE)
 
     def hide_object(self, object):
         object.undraw()
@@ -72,7 +75,16 @@ class World:
     def wait_to_press_key(self, key):
         """Czekaj aż zostanie wciśnięty klawisz 'key' """
 
-        key_pressed = self.window_handle.checkKey()
+        key_pressed = self.__WINDOW_HANDLE.checkKey()
         while key_pressed != key:
-            key_pressed = self.window_handle.checkKey()
+            key_pressed = self.__WINDOW_HANDLE.checkKey()
+
+    def create_organism(self):
+        """Metoda testowa, tworzy organizm"""
+
+        x_position = random.randint(0, self.__BOARD_WIDTH_IN_FIELDS)
+        y_position = random.randint(0, self.__BOARD_HEIGHT_IN_FIELDS)
+        organism = Organism(self.__WINDOW_HANDLE, x_position, y_position)
+
+        return organism
 

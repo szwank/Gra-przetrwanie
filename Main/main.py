@@ -1,5 +1,6 @@
 from graphics import *
-import time
+from organism import Organism
+
 from world import World
 from init_window import WindowInitializer
 
@@ -14,6 +15,11 @@ def main():
 
     world = World(int(width), int(height))
     world.display_board()
+
+    organism = world.create_organism()
+    organism.draw()
+
+
 
     world.wait_to_press_key('Return')
     # input_window.getMouse()

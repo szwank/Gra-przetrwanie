@@ -80,3 +80,5 @@ class WindowInitializer:
             message.undraw()
 
         return (input_message)
+
+
