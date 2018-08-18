@@ -1,7 +1,9 @@
 from graphics import *
 from graphic_object_creator import GraphicObjectCreator
 import random
-from organism import Organism
+
+from animal import Animal
+
 
 class World:
     __CONSOLE_WIDTH = 300
@@ -18,7 +20,7 @@ class World:
 
         self.__WINDOW_HANDLE = GraphWin(self.__WINDOW_NAME, self.__WIDTH, self.__HEIGHT)
 
-        self.grafic_object_creator = GraphicObjectCreator(self.__HEIGHT)
+        self.__grafic_object_creator = GraphicObjectCreator(self.__WINDOW_HANDLE)
 
         random.seed()
 
@@ -46,7 +48,7 @@ class World:
         for i in range(self.__BOARD_WIDTH_IN_FIELDS + 1):
             x = i * self.__FIELD_SIZE
 
-            line = self.grafic_object_creator.create_line(Point(x, upper_y), Point(x, bottom_y))
+            line = self.__grafic_object_creator.create_line(Point(x, upper_y), Point(x, bottom_y))
             lines.append(line)
         return lines
 
@@ -57,7 +59,7 @@ class World:
         for i in range(self.__BOARD_WIDTH_IN_FIELDS + 1):
             y = i * self.__FIELD_SIZE
 
-            line = self.grafic_object_creator.create_line(Point(left_x, y), Point(right_x, y))
+            line = self.__grafic_object_creator.create_line(Point(left_x, y), Point(right_x, y))
             lines.append(line)
         return lines
 
@@ -79,12 +81,22 @@ class World:
         while key_pressed != key:
             key_pressed = self.__WINDOW_HANDLE.checkKey()
 
+    '''                                                            #testowanie
     def create_organism(self):
         """Metoda testowa, tworzy organizm"""
 
-        x_position = random.randint(0, self.__BOARD_WIDTH_IN_FIELDS)
-        y_position = random.randint(0, self.__BOARD_HEIGHT_IN_FIELDS)
+        x_position = random.randint(1, self.__BOARD_WIDTH_IN_FIELDS)
+        y_position = random.randint(1, self.__BOARD_HEIGHT_IN_FIELDS)
         organism = Organism(self.__WINDOW_HANDLE, x_position, y_position)
 
         return organism
+    '''
 
+    def create_animal(self):
+        """Metoda testowa, tworzy organizm"""
+
+        x_position = random.randint(1, self.__BOARD_WIDTH_IN_FIELDS)
+        y_position = random.randint(1, self.__BOARD_HEIGHT_IN_FIELDS)
+        animal = Animal(self.__WINDOW_HANDLE, x_position, y_position)
+
+        return animal

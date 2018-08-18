@@ -6,6 +6,7 @@ from init_window import WindowInitializer
 
 
 def main():
+    '''  #debugoawnie kodu
     init_window = WindowInitializer()
     width = init_window.ask_about_number('Podaj ilość pól szerokości gry:')
     height = init_window.ask_about_number('Podaj ilość pól wysokość gry:')
@@ -14,12 +15,15 @@ def main():
     print('szerokość: ' + width + ', wysokość: ' + height)
 
     world = World(int(width), int(height))
+    '''
+    world = World(10, 10)
     world.display_board()
 
-    organism = world.create_organism()
-    organism.draw()
+    animal = world.create_animal()
+    center_point = animal.draw()
 
-
+    print('położenie środkowe obiektu x: ', center_point.getX(), ',y: ', center_point.getY())
+    print()
 
     world.wait_to_press_key('Return')
     # input_window.getMouse()
