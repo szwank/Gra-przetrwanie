@@ -1,5 +1,6 @@
 from graphics import *
 from organism import Organism
+import time
 
 from world import World
 from init_window import WindowInitializer
@@ -23,7 +24,10 @@ def main():
     center_point = animal.draw()
 
     print('położenie środkowe obiektu x: ', center_point.getX(), ',y: ', center_point.getY())
-    print()
+
+    for i in range(100):
+        animal.make_action()
+        time.sleep(0.5)
 
     world.wait_to_press_key('Return')
     # input_window.getMouse()

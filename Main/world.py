@@ -6,19 +6,19 @@ from animal import Animal
 
 
 class World:
-    __CONSOLE_WIDTH = 300
-    __CONSOLE_HEIGHT = 300
-    __FIELD_SIZE = 30
-    __WINDOW_NAME = 'Świat'
+    _CONSOLE_WIDTH = 300
+    _CONSOLE_HEIGHT = 300
+    _FIELD_SIZE = 30
+    _WINDOW_NAME = 'Świat'
 
     def __init__(self, width_of_the_board_in_the_fields, the_height_of_the_board_in_the_fields):
         self.__BOARD_WIDTH_IN_FIELDS = width_of_the_board_in_the_fields
         self.__BOARD_HEIGHT_IN_FIELDS = the_height_of_the_board_in_the_fields
 
-        self.__WIDTH = width_of_the_board_in_the_fields * self.__FIELD_SIZE + self.__CONSOLE_WIDTH
-        self.__HEIGHT = the_height_of_the_board_in_the_fields * self.__FIELD_SIZE
+        self.__WIDTH = width_of_the_board_in_the_fields * self._FIELD_SIZE + self._CONSOLE_WIDTH
+        self.__HEIGHT = the_height_of_the_board_in_the_fields * self._FIELD_SIZE
 
-        self.__WINDOW_HANDLE = GraphWin(self.__WINDOW_NAME, self.__WIDTH, self.__HEIGHT)
+        self.__WINDOW_HANDLE = GraphWin(self._WINDOW_NAME, self.__WIDTH, self.__HEIGHT)
 
         self.__grafic_object_creator = GraphicObjectCreator(self.__WINDOW_HANDLE)
 
@@ -33,37 +33,37 @@ class World:
     def display_board(self):
         """Utwórz i wyświetl linie pól planszy
         """
-        lines = self.__create_board_lines()
-        self.__display_graphic_objects(lines)
+        lines = self._create_board_lines()
+        self._display_graphic_objects(lines)
 
-    def __create_board_lines(self):
-        horizontal_lines = self.__create_horizontal_lines()
-        vertical_lines = self.__create_vertical_lines()
+    def _create_board_lines(self):
+        horizontal_lines = self._create_horizontal_lines()
+        vertical_lines = self._create_vertical_lines()
         return horizontal_lines + vertical_lines
 
-    def __create_vertical_lines(self):
+    def _create_vertical_lines(self):
         lines = []
         upper_y = 0
-        bottom_y = self.__BOARD_HEIGHT_IN_FIELDS * self.__FIELD_SIZE
+        bottom_y = self.__BOARD_HEIGHT_IN_FIELDS * self._FIELD_SIZE
         for i in range(self.__BOARD_WIDTH_IN_FIELDS + 1):
-            x = i * self.__FIELD_SIZE
+            x = i * self._FIELD_SIZE
 
             line = self.__grafic_object_creator.create_line(Point(x, upper_y), Point(x, bottom_y))
             lines.append(line)
         return lines
 
-    def __create_horizontal_lines(self):
+    def _create_horizontal_lines(self):
         lines = []
         left_x = 0
-        right_x = self.__BOARD_WIDTH_IN_FIELDS * self.__FIELD_SIZE
+        right_x = self.__BOARD_WIDTH_IN_FIELDS * self._FIELD_SIZE
         for i in range(self.__BOARD_WIDTH_IN_FIELDS + 1):
-            y = i * self.__FIELD_SIZE
+            y = i * self._FIELD_SIZE
 
             line = self.__grafic_object_creator.create_line(Point(left_x, y), Point(right_x, y))
             lines.append(line)
         return lines
 
-    def __display_graphic_objects(self, lines):
+    def _display_graphic_objects(self, lines):
         for line in lines:
             self.display_object(line)
 

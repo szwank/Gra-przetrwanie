@@ -3,7 +3,7 @@ from graphic_object_creator import GraphicObjectCreator
 
 
 class Organism(object):
-    __SIZE_ON_THE_BOARD = 30
+    _SIZE_ON_THE_BOARD = 30
     strength = 0
     initiative = 0
     position = [0, 0]
@@ -14,11 +14,11 @@ class Organism(object):
         self.__WORLD_HANDLE = world_handle
         self.__GRAPHIC_OBJECT_CREATOR = GraphicObjectCreator(self.__WORLD_HANDLE)
 
-        x_center = (x_position_in_fields - 1) * self.__SIZE_ON_THE_BOARD + self.__SIZE_ON_THE_BOARD / 2
-        y_center = (y_position_in_fields - 1) * self.__SIZE_ON_THE_BOARD + self.__SIZE_ON_THE_BOARD / 2
+        x_center = (x_position_in_fields - 1) * self._SIZE_ON_THE_BOARD + self._SIZE_ON_THE_BOARD / 2
+        y_center = (y_position_in_fields - 1) * self._SIZE_ON_THE_BOARD + self._SIZE_ON_THE_BOARD / 2
 
         self._representation = self.__GRAPHIC_OBJECT_CREATOR.create_rectangle(
-                                Point(x_center, y_center), self.__SIZE_ON_THE_BOARD, self.__SIZE_ON_THE_BOARD)
+                                Point(x_center, y_center), self._SIZE_ON_THE_BOARD, self._SIZE_ON_THE_BOARD)
         self._representation.setFill('black')  #kolor klasy organism
 
     def make_action(self):
