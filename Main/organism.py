@@ -65,4 +65,4 @@ class Organism(object):
             return False
 
     def _make_child(self):
-        return child = Organism(self._WORLD_HANDLE, 1, 1)
+        return Organism(self._WORLD_HANDLE, 1, 1)
