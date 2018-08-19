@@ -41,10 +41,10 @@ class Organism(object):
 
     def _create_organism_on_random_position(self):
         """Tworzy i zwraca organizm na losowej pozycij"""
-        self.x_position_in_fields = random.randint(1, self._BOARD_WIDTH_IN_FIELDS)
-        self.y_position_in_fields = random.randint(1, self._BOARD_HEIGHT_IN_FIELDS)
+        self._x_position_in_fields = random.randint(1, self._BOARD_WIDTH_IN_FIELDS)
+        self._y_position_in_fields = random.randint(1, self._BOARD_HEIGHT_IN_FIELDS)
 
-        x_center = (self.x_position_in_fields - 1) * self._SIZE_ON_THE_BOARD + self._SIZE_ON_THE_BOARD / 2
-        y_center = (self.y_position_in_fields - 1) * self._SIZE_ON_THE_BOARD + self._SIZE_ON_THE_BOARD / 2
+        x_center = (self._x_position_in_fields - 1) * self._SIZE_ON_THE_BOARD + self._SIZE_ON_THE_BOARD / 2
+        y_center = (self._y_position_in_fields - 1) * self._SIZE_ON_THE_BOARD + self._SIZE_ON_THE_BOARD / 2
         return self.__GRAPHIC_OBJECT_CREATOR.create_rectangle(
             Point(x_center, y_center), self._SIZE_ON_THE_BOARD, self._SIZE_ON_THE_BOARD)

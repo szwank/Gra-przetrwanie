@@ -20,8 +20,7 @@ class Animal(Organism):
     def _move_in_random_direction(self):
         """Losowo przesuwa zwierze i zwraca nową pozycję
         """
-        #direction = random.randint(1, 4)
-        direction = 4
+        direction = random.randint(1, 4)
 
         if direction is 1:
 
@@ -56,7 +55,7 @@ class Animal(Organism):
         zwierzęcia
         """
         if self._x_position_in_fields > 1:
-            self._representation.move( -self._SIZE_ON_THE_BOARD, 0)
+            self._representation.move(-self._SIZE_ON_THE_BOARD, 0)
             self._x_position_in_fields -= 1
             return True
         else:
