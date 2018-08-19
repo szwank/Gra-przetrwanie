@@ -1,8 +1,9 @@
-from graphics import *
-from graphic_object_creator import GraphicObjectCreator
 import random
 
+from graphics import *
+
 from animal import Animal
+from graphic_object_creator import GraphicObjectCreator
 
 
 class World:
@@ -21,11 +22,11 @@ class World:
         self.__WINDOW_HANDLE = GraphWin(self._WINDOW_NAME, self.__WIDTH, self.__HEIGHT)
 
         self.__grafic_object_creator = GraphicObjectCreator(self.__WINDOW_HANDLE)
-       # self.__NUMBER_OF_LIVING_BEING = round(self.__BOARD_HEIGHT_IN_FIELDS * self.__BOARD_WIDTH_IN_FIELDS / 3)
+        # self.__NUMBER_OF_LIVING_BEING = round(self.__BOARD_HEIGHT_IN_FIELDS * self.__BOARD_WIDTH_IN_FIELDS / 3)
         self.__NUMBER_OF_LIVING_BEING = 3
         random.seed()
 
-        self.__live_beings = self._create_life()    #tworzy losowe rośliny i zwierzęta
+        self.__live_beings = self._create_life()  # tworzy losowe rośliny i zwierzęta
 
     def draw_world(self):
         self._display_board()
@@ -36,7 +37,7 @@ class World:
     def make_turn(self):
         """wykonuje akcje żywymi istotami"""
 
-        for live_being in self.__live_beings:    #wykonuje akcje wszystkimi żywymi istotami
+        for live_being in self.__live_beings:  # wykonuje akcje wszystkimi żywymi istotami
             live_being.make_action()
 
     def _display_board(self):
@@ -110,7 +111,7 @@ class World:
         return animal
 
     def _create_plant(self):
-        pass
+        pass                      # Stwurz roślinę
 
     def _create_random_plant(self):
         pass
@@ -122,6 +123,10 @@ class World:
 
         if which_animal_to_create is 1:
             return self._create_animal()
+        '''
+        else:
+            #stworz inne zwierzęta
+        '''
 
     def _create_random_being(self):
         """Tworzy losowo zwierze lub roślinę"""

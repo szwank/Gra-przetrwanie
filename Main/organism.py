@@ -5,14 +5,13 @@ import random
 
 class Organism(object):
     _SIZE_ON_THE_BOARD = 30
-    strength = 0
-    initiative = 0
-    position = [0, 0]
-    world = 0
+    _strength = 0
+    _initiative = 0
+    _name = 'None'
 
     def __init__(self, world_handle, board_height_in_fields, board_widthn_in_fields):
         self._WORLD_HANDLE = world_handle
-        self.__GRAPHIC_OBJECT_CREATOR = GraphicObjectCreator(self._WORLD_HANDLE) #stworzenie fabryki obiektów
+        self.__GRAPHIC_OBJECT_CREATOR = GraphicObjectCreator(self._WORLD_HANDLE)  # stworzenie fabryki obiektów
 
         self._BOARD_WIDTH_IN_FIELDS = board_height_in_fields
         self._BOARD_HEIGHT_IN_FIELDS = board_widthn_in_fields
@@ -25,8 +24,13 @@ class Organism(object):
     def make_action(self):
         pass
 
-    def collision(self):
-        pass
+    def collision(self, being):
+        """"Wykonanie mechanizmu kolizij
+        """
+        if self._check_if_they_are_the_same_beings(being) is True:
+            pass  # rozmnuz sie
+        else:
+            pass  # walcz
 
     def __display(self, object):
         object.draw(self._WORLD_HANDLE)
@@ -48,3 +52,17 @@ class Organism(object):
         y_center = (self.y_position_in_fields - 1) * self._SIZE_ON_THE_BOARD + self._SIZE_ON_THE_BOARD / 2
         return self.__GRAPHIC_OBJECT_CREATOR.create_rectangle(
             Point(x_center, y_center), self._SIZE_ON_THE_BOARD, self._SIZE_ON_THE_BOARD)
+
+    def get_name(self):
+        return self._name
+
+    def _check_if_they_are_the_same_beings(self, being):
+        """"Sprawdza czy obiekty sá tymi samymi istotami na podstawie ich nazwy"""
+
+        if self._name is being.getname():
+            return True
+        else:
+            return False
+
+    def _make_child(self):
+        return child = Organism(self._WORLD_HANDLE, 1, 1)

@@ -1,7 +1,6 @@
-from organism import Organism
-from graphic_object_creator import GraphicObjectCreator
-from graphics import *
 import random
+
+from organism import Organism
 
 
 class Animal(Organism):
@@ -10,18 +9,15 @@ class Animal(Organism):
         super(Animal, self).__init__(world_handle, board_height_in_fields, board_width_in_fields)
 
         self._representation.setFill('grey')  # kolor klasy organism
+        self._name = 'Animal'
 
     def make_action(self):
         self._move_in_random_direction()
 
-    def collision(self):
-        pass
-
     def _move_in_random_direction(self):
         """Losowo przesuwa zwierze i zwraca nową pozycję
         """
-        #direction = random.randint(1, 4)
-        direction = 4
+        direction = random.randint(1, 4)
 
         if direction is 1:
 
@@ -56,7 +52,7 @@ class Animal(Organism):
         zwierzęcia
         """
         if self._x_position_in_fields > 1:
-            self._representation.move( -self._SIZE_ON_THE_BOARD, 0)
+            self._representation.move(-self._SIZE_ON_THE_BOARD, 0)
             self._x_position_in_fields -= 1
             return True
         else:
