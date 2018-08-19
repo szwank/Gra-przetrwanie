@@ -6,8 +6,8 @@ import random
 
 class Animal(Organism):
 
-    def __init__(self, world_handle, x_position_in_fields, y_position_in_fields):
-        super(Animal, self).__init__(world_handle, x_position_in_fields, y_position_in_fields)
+    def __init__(self, world_handle, board_height_in_fields, board_width_in_fields):
+        super(Animal, self).__init__(world_handle, board_height_in_fields, board_width_in_fields)
 
         self._representation.setFill('grey')  # kolor klasy organism
 
@@ -20,31 +20,66 @@ class Animal(Organism):
     def _move_in_random_direction(self):
         """Losowo przesuwa zwierze i zwraca nową pozycję
         """
-        direction = random.randint(1, 4)
+        #direction = random.randint(1, 4)
+        direction = 4
 
         if direction is 1:
-            self._move_animal_right()
+
+            print('Ruch w prawo został wykonany: ')
+            print(self._move_animal_right())
         elif direction is 2:
-            self._move_animal_left()
+            print('Ruch w lewo został wykonany: ')
+            print(self._move_animal_left())
         elif direction is 3:
-            self._move_animal_upward()
+            print('Ruch do gury został wykonany: ')
+            print(self._move_animal_upward())
         else:
-            self._move_animal_down()
+            print('Ruch w dół został wykonany: ')
+            print(self._move_animal_down())
 
         return direction
 
     def _move_animal_right(self):
-        """Przesuwa zwierze w prawo"""
-        self._representation.move(self._SIZE_ON_THE_BOARD, 0)
+        """Przesuwa zwierze w prawo, zwraca Prawde gdy uda się wykonać przesunięcie, i fałsz gdy nie można przesunąć
+        zwierzęcia
+        """
+
+        if self._x_position_in_fields < self._BOARD_WIDTH_IN_FIELDS:
+            self._representation.move(self._SIZE_ON_THE_BOARD, 0)
+            self._x_position_in_fields += 1
+            return True
+        else:
+            return False
 
     def _move_animal_left(self):
-        """Przesuwa zwierze w lewo"""
-        self._representation.move( -self._SIZE_ON_THE_BOARD, 0)
+        """Przesuwa zwierze w lewo, zwraca Prawde gdy uda się wykonać przesunięcie, i fałsz gdy nie można przesunąć
+        zwierzęcia
+        """
+        if self._x_position_in_fields > 1:
+            self._representation.move( -self._SIZE_ON_THE_BOARD, 0)
+            self._x_position_in_fields -= 1
+            return True
+        else:
+            return False
 
     def _move_animal_upward(self):
-        """Przesuwa zwierze do gury"""
-        self._representation.move(0, -self._SIZE_ON_THE_BOARD)
+        """Przesuwa zwierze do gury, zwraca Prawde gdy uda się wykonać przesunięcie, i fałsz gdy nie można przesunąć
+        zwierzęcia
+        """
+        if self._y_position_in_fields < self._BOARD_HEIGHT_IN_FIELDS:
+            self._representation.move(0, -self._SIZE_ON_THE_BOARD)
+            self._y_position_in_fields += 1
+            return True
+        else:
+            return False
 
     def _move_animal_down(self):
-        """Przesuwa zwierze w duł"""
-        self._representation.move(0, self._SIZE_ON_THE_BOARD)
+        """Przesuwa zwierze w dół, zwraca Prawde gdy uda się wykonać przesunięcie, i fałsz gdy nie można przesunąć
+        zwierzęcia
+        """
+        if self._y_position_in_fields > 1:
+            self._representation.move(0, self._SIZE_ON_THE_BOARD)
+            self._y_position_in_fields -= 1
+            return True
+        else:
+            return False

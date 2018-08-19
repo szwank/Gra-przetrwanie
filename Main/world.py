@@ -21,16 +21,25 @@ class World:
         self.__WINDOW_HANDLE = GraphWin(self._WINDOW_NAME, self.__WIDTH, self.__HEIGHT)
 
         self.__grafic_object_creator = GraphicObjectCreator(self.__WINDOW_HANDLE)
-
+       # self.__NUMBER_OF_LIVING_BEING = round(self.__BOARD_HEIGHT_IN_FIELDS * self.__BOARD_WIDTH_IN_FIELDS / 3)
+        self.__NUMBER_OF_LIVING_BEING = 3
         random.seed()
 
+        self.__live_beings = self._create_life()    #tworzy losowe rośliny i zwierzęta
+
     def draw_world(self):
-        pass
+        self._display_board()
+
+        for live_being in self.__live_beings:
+            live_being.draw()
 
     def make_turn(self):
-        pass
+        """wykonuje akcje żywymi istotami"""
 
-    def display_board(self):
+        for live_being in self.__live_beings:    #wykonuje akcje wszystkimi żywymi istotami
+            live_being.make_action()
+
+    def _display_board(self):
         """Utwórz i wyświetl linie pól planszy
         """
         lines = self._create_board_lines()
@@ -68,7 +77,7 @@ class World:
             self.display_object(line)
 
     def display_object(self, object):
-        """Wyświetla obiekt Line"""
+        """Wyświetla obiekt"""
         object.draw(self.__WINDOW_HANDLE)
 
     def hide_object(self, object):
@@ -92,11 +101,43 @@ class World:
         return organism
     '''
 
-    def create_animal(self):
+    def _create_animal(self):
         """Metoda testowa, tworzy organizm"""
 
-        x_position = random.randint(1, self.__BOARD_WIDTH_IN_FIELDS)
-        y_position = random.randint(1, self.__BOARD_HEIGHT_IN_FIELDS)
-        animal = Animal(self.__WINDOW_HANDLE, x_position, y_position)
+        animal = Animal(self.__WINDOW_HANDLE, self.__BOARD_WIDTH_IN_FIELDS,
+                        self.__BOARD_HEIGHT_IN_FIELDS)
 
         return animal
+
+    def _create_plant(self):
+        pass
+
+    def _create_random_plant(self):
+        pass
+
+    def _create_random_animal(self):
+        """Tworzy losowe zwierze"""
+
+        which_animal_to_create = random.randint(1, 1)
+
+        if which_animal_to_create is 1:
+            return self._create_animal()
+
+    def _create_random_being(self):
+        """Tworzy losowo zwierze lub roślinę"""
+
+        which_plant_to_create = random.randint(1, 1)
+
+        if which_plant_to_create is 1:
+            return self._create_random_animal()
+        else:
+            return self._create_random_plant()
+
+    def _create_life(self):
+        """Tworzy rośliny i zwierzęta"""
+        live_beings = []
+
+        for i in range(self.__NUMBER_OF_LIVING_BEING):
+            live_beings.append(self._create_random_being())
+
+        return live_beings

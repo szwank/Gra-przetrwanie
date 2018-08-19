@@ -18,16 +18,14 @@ def main():
     world = World(int(width), int(height))
     '''
     world = World(10, 10)
-    world.display_board()
+    world.draw_world()
 
-    animal = world.create_animal()
-    center_point = animal.draw()
 
-    print('położenie środkowe obiektu x: ', center_point.getX(), ',y: ', center_point.getY())
+
 
     for i in range(100):
-        animal.make_action()
-        time.sleep(0.5)
+        world.make_turn()
+        time.sleep(0.3)
 
     world.wait_to_press_key('Return')
     # input_window.getMouse()
