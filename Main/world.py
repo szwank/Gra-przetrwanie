@@ -13,6 +13,9 @@ class World:
     _WINDOW_NAME = 'Świat'
 
     def __init__(self, width_of_the_board_in_the_fields, the_height_of_the_board_in_the_fields):
+
+        random.seed()
+
         self.__BOARD_WIDTH_IN_FIELDS = width_of_the_board_in_the_fields
         self.__BOARD_HEIGHT_IN_FIELDS = the_height_of_the_board_in_the_fields
 
@@ -24,7 +27,7 @@ class World:
         self.__graphic_object_creator = GraphicObjectCreator(self.__HEIGHT)
        # self.__NUMBER_OF_LIVING_BEING = round(self.__BOARD_HEIGHT_IN_FIELDS * self.__BOARD_WIDTH_IN_FIELDS / 3)
         self.__NUMBER_OF_LIVING_BEING = 3
-        random.seed()
+
 
         self.__ORGANISM_CREATOR = OrganismCreator()
 
@@ -107,7 +110,9 @@ class World:
     def _create_wolf(self):
         """Metoda testowa, tworzy organizm"""
 
-        animal = self.__ORGANISM_CREATOR.create_the_organism('wolf', self)
+        position = self.get_random_position()
+
+        animal = self.__ORGANISM_CREATOR.create_the_organism('wolf', self, position[0], position[1])
 
         return animal
 
@@ -160,6 +165,13 @@ class World:
 
     def get_window_handle(self):
         return self.__WINDOW_HANDLE
+
+    def get_random_position(self):
+        """Losuje pozycję i listę z wartościami"""
+        x_position = random.randint(1, self.__BOARD_WIDTH_IN_FIELDS)
+        y_position = random.randint(1, self.__BOARD_HEIGHT_IN_FIELDS)
+
+        return [x_position, y_position]
 
 
 

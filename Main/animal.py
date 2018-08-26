@@ -6,8 +6,8 @@ import random
 
 class Animal(Organism):
 
-    def __init__(self, world_handle):
-        super(Animal, self).__init__(world_handle)
+    def __init__(self, world_handle, height_position_in_fields, width_position_in_fields):
+        super(Animal, self).__init__(world_handle, height_position_in_fields, width_position_in_fields)
 
         self._representation.setFill('grey')  # kolor klasy organism
 
