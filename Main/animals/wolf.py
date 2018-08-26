@@ -8,6 +8,7 @@ class Wolf(Animal):
 
         self._strength = 9
         self._initiative = 5
+        self._name = 'wolf'
 
         self._representation.setFill('red')  # kolor klasy wilk
 

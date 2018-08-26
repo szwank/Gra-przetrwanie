@@ -3,8 +3,6 @@ from graphic_object_creator import GraphicObjectCreator
 import random
 from organism_creator import OrganismCreator
 
-from animal import Animal
-
 
 class World:
     _CONSOLE_WIDTH = 300
@@ -25,13 +23,12 @@ class World:
         self.__WINDOW_HANDLE = GraphWin(self._WINDOW_NAME, self.__WIDTH, self.__HEIGHT)
 
         self.__graphic_object_creator = GraphicObjectCreator(self.__HEIGHT)
-       # self.__NUMBER_OF_LIVING_BEING = round(self.__BOARD_HEIGHT_IN_FIELDS * self.__BOARD_WIDTH_IN_FIELDS / 3)
+        # self.__NUMBER_OF_LIVING_BEING = round(self.__BOARD_HEIGHT_IN_FIELDS * self.__BOARD_WIDTH_IN_FIELDS / 3)
         self.__NUMBER_OF_LIVING_BEING = 3
-
 
         self.__ORGANISM_CREATOR = OrganismCreator()
 
-        self.__live_organisms = self._create_life()    #tworzy losowe rośliny i zwierzęta
+        self.__live_organisms = self._create_life()  # tworzy losowe rośliny i zwierzęta
 
     def draw_world(self):
         self._display_board()
@@ -39,10 +36,16 @@ class World:
         for live_being in self.__live_organisms:
             live_being.draw()
 
-    def make_turn(self):
-        """wykonuje akcje żywymi istotami"""
+    def get_organism_initiative(self, organism):
+        return organism.get_initiative()
 
-        for live_being in self.__live_organisms:    #wykonuje akcje wszystkimi żywymi istotami
+    def make_turn(self):
+        """Wykonuje akcje żywymi istotami, ustawiając uprzednio kolejność wykonywania akcij
+        """
+
+        self.__live_organisms.sort(key=self.get_organism_initiative)
+
+        for live_being in self.__live_organisms:  # wykonuje akcje wszystkimi żywymi istotami
             live_being.make_action()
 
     def _display_board(self):
@@ -172,7 +175,3 @@ class World:
         y_position = random.randint(1, self.__BOARD_HEIGHT_IN_FIELDS)
 
         return [x_position, y_position]
-
-
-
-

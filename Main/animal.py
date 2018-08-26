@@ -1,6 +1,4 @@
 from organism import Organism
-from graphic_object_creator import GraphicObjectCreator
-from graphics import *
 import random
 
 
@@ -10,6 +8,7 @@ class Animal(Organism):
         super(Animal, self).__init__(world_handle, height_position_in_fields, width_position_in_fields)
 
         self._representation.setFill('grey')  # kolor klasy organism
+        self._name = 'animal'
 
     def make_action(self):
         self._move_in_random_direction()

@@ -1,5 +1,3 @@
-from graphics import *
-from organism import Organism
 import time
 
 from world import World

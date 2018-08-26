@@ -1,5 +1,6 @@
 from graphics import *
 from graphic_object_creator import GraphicObjectCreator
+from organism_creator import OrganismCreator
 
 
 #  import random
@@ -9,9 +10,13 @@ class Organism(object):
     _SIZE_ON_THE_BOARD = 30
     _strength = 0
     _initiative = 0
+    _name = 'organism'
 
     def __init__(self, world_handle, height_position_in_fields, width_position_in_fields):
+
         self._WORLD_HANDLE = world_handle
+
+        self._ORGANISM_CREATOR = OrganismCreator()
 
         self.__GRAPHIC_OBJECT_CREATOR = GraphicObjectCreator(
             self._WORLD_HANDLE.get_height_of_window())  # stworzenie fabryki obiektów
@@ -30,7 +35,7 @@ class Organism(object):
         """Mechaniz kolizij. Sprawdz czy 2 organizmy są takie same jeżeli są to zrob 3 taki sam obok, jeżeli nie są- walczą"""
 
         if self.check_if_the_organism_is_the_same_type_as_host(the_organism_with_witch_the_collision_occurred) is True:
-            pass  # make child
+            self.make_child()
         else:
             self.fight_with_enemy(the_organism_with_witch_the_collision_occurred)
 
@@ -89,3 +94,9 @@ class Organism(object):
 
     def make_child(self):
         """zrob kopje organizmu"""
+        x_child_position = self._x_position_in_fields
+        y_child_position = self._y_position_in_fields + 1
+        self._ORGANISM_CREATOR.create_the_organism(self._name, self._WORLD_HANDLE, x_child_position, y_child_position)
+
+    def get_initiative(self):
+        return self._initiative
