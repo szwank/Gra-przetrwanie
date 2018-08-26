@@ -1,6 +1,7 @@
 from graphics import *
 from graphic_object_creator import GraphicObjectCreator
 import random
+from organism_creator import OrganismCreator
 
 from animal import Animal
 
@@ -20,23 +21,25 @@ class World:
 
         self.__WINDOW_HANDLE = GraphWin(self._WINDOW_NAME, self.__WIDTH, self.__HEIGHT)
 
-        self.__grafic_object_creator = GraphicObjectCreator(self.__WINDOW_HANDLE)
+        self.__graphic_object_creator = GraphicObjectCreator(self.__HEIGHT)
        # self.__NUMBER_OF_LIVING_BEING = round(self.__BOARD_HEIGHT_IN_FIELDS * self.__BOARD_WIDTH_IN_FIELDS / 3)
         self.__NUMBER_OF_LIVING_BEING = 3
         random.seed()
 
-        self.__live_beings = self._create_life()    #tworzy losowe rośliny i zwierzęta
+        self.__ORGANISM_CREATOR = OrganismCreator()
+
+        self.__live_organisms = self._create_life()    #tworzy losowe rośliny i zwierzęta
 
     def draw_world(self):
         self._display_board()
 
-        for live_being in self.__live_beings:
+        for live_being in self.__live_organisms:
             live_being.draw()
 
     def make_turn(self):
         """wykonuje akcje żywymi istotami"""
 
-        for live_being in self.__live_beings:    #wykonuje akcje wszystkimi żywymi istotami
+        for live_being in self.__live_organisms:    #wykonuje akcje wszystkimi żywymi istotami
             live_being.make_action()
 
     def _display_board(self):
@@ -57,7 +60,7 @@ class World:
         for i in range(self.__BOARD_WIDTH_IN_FIELDS + 1):
             x = i * self._FIELD_SIZE
 
-            line = self.__grafic_object_creator.create_line(Point(x, upper_y), Point(x, bottom_y))
+            line = self.__graphic_object_creator.create_line(Point(x, upper_y), Point(x, bottom_y))
             lines.append(line)
         return lines
 
@@ -68,7 +71,7 @@ class World:
         for i in range(self.__BOARD_WIDTH_IN_FIELDS + 1):
             y = i * self._FIELD_SIZE
 
-            line = self.__grafic_object_creator.create_line(Point(left_x, y), Point(right_x, y))
+            line = self.__graphic_object_creator.create_line(Point(left_x, y), Point(right_x, y))
             lines.append(line)
         return lines
 
@@ -101,11 +104,10 @@ class World:
         return organism
     '''
 
-    def _create_animal(self):
+    def _create_wolf(self):
         """Metoda testowa, tworzy organizm"""
 
-        animal = Animal(self.__WINDOW_HANDLE, self.__BOARD_WIDTH_IN_FIELDS,
-                        self.__BOARD_HEIGHT_IN_FIELDS)
+        animal = self.__ORGANISM_CREATOR.create_the_organism('wolf', self)
 
         return animal
 
@@ -121,9 +123,9 @@ class World:
         which_animal_to_create = random.randint(1, 1)
 
         if which_animal_to_create is 1:
-            return self._create_animal()
+            return self._create_wolf()
 
-    def _create_random_being(self):
+    def _create_random_organism(self):
         """Tworzy losowo zwierze lub roślinę"""
 
         which_plant_to_create = random.randint(1, 1)
@@ -138,6 +140,27 @@ class World:
         live_beings = []
 
         for i in range(self.__NUMBER_OF_LIVING_BEING):
-            live_beings.append(self._create_random_being())
+            live_beings.append(self._create_random_organism())
 
         return live_beings
+
+    def get_board_height_in_fields(self):
+        return self.__BOARD_HEIGHT_IN_FIELDS
+
+    def get_board_width_in_fields(self):
+        return self.__BOARD_WIDTH_IN_FIELDS
+
+    def kill_organism(self, organism):
+        """Usuwa organizm z listy organizmów"""
+
+        self.__live_organisms.remove(organism)
+
+    def get_height_of_window(self):
+        return self.__WINDOW_HANDLE.getHeight()
+
+    def get_window_handle(self):
+        return self.__WINDOW_HANDLE
+
+
+
+

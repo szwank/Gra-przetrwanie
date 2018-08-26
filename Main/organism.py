@@ -5,17 +5,15 @@ import random
 
 class Organism(object):
     _SIZE_ON_THE_BOARD = 30
-    strength = 0
-    initiative = 0
-    position = [0, 0]
-    world = 0
+    _strength = 0
+    _initiative = 0
 
-    def __init__(self, world_handle, board_height_in_fields, board_widthn_in_fields):
+    def __init__(self, world_handle):
         self._WORLD_HANDLE = world_handle
-        self.__GRAPHIC_OBJECT_CREATOR = GraphicObjectCreator(self._WORLD_HANDLE) #stworzenie fabryki obiektów
+        self.__GRAPHIC_OBJECT_CREATOR = GraphicObjectCreator(self._WORLD_HANDLE.get_height_of_window()) #stworzenie fabryki obiektów
 
-        self._BOARD_WIDTH_IN_FIELDS = board_height_in_fields
-        self._BOARD_HEIGHT_IN_FIELDS = board_widthn_in_fields
+        self._BOARD_WIDTH_IN_FIELDS = self._WORLD_HANDLE.get_board_width_in_fields()
+        self._BOARD_HEIGHT_IN_FIELDS = self._WORLD_HANDLE.get_board_height_in_fields()
 
         random.seed()
         self._representation = self._create_organism_on_random_position()
@@ -25,18 +23,25 @@ class Organism(object):
     def make_action(self):
         pass
 
-    def collision(self):
-        pass
+    def collision(self, the_organism_with_witch_the_collision_occurred):
+        """Mechaniz kolizij. Sprawdz czy 2 organizmy są takie same jeżeli są to zrob 3 taki sam obok, jeżeli nie są- walczą"""
 
-    def __display(self, object):
-        object.draw(self._WORLD_HANDLE)
+        if self.check_if_the_organism_is_the_same_type_as_host(the_organism_with_witch_the_collision_occurred) is True:
+            pass  # make child
+        else:
+            self.fight_with_enemy(the_organism_with_witch_the_collision_occurred)
 
-    def __hide(self, object):
-        object.undraw()
+
+
+    def __display(self):
+        self._representation.draw(self._WORLD_HANDLE.get_window_handle())
+
+    def __hide(self):
+        self._representation.undraw()
 
     def draw(self):
         """Metoda rysuje i zwraca munkt środkowy w ktorym się znajduje(do debugowania)"""
-        self.__display(self._representation)
+        self.__display()
         return self._representation.getCenter()  # usunąc po debugowaniu
 
     def _create_organism_on_random_position(self):
@@ -48,3 +53,44 @@ class Organism(object):
         y_center = (self._y_position_in_fields - 1) * self._SIZE_ON_THE_BOARD + self._SIZE_ON_THE_BOARD / 2
         return self.__GRAPHIC_OBJECT_CREATOR.create_rectangle(
             Point(x_center, y_center), self._SIZE_ON_THE_BOARD, self._SIZE_ON_THE_BOARD)
+
+    def check_if_the_organism_is_the_same_type_as_host(self, organism):
+
+        if __eq__(self.__class__, organism):
+            return True
+        else:
+            return False
+
+    def get_strength(self):
+        return self._strength
+
+    def fight_with_enemy(self, enemy):
+
+        if self.check_if_host_is_stronger(enemy) is True:
+            enemy.kill()
+        else:
+            self.kill()
+
+    def check_if_host_is_stronger(self, enemy):
+
+        if self.get_strength() >= enemy.get_strength:
+            return True
+        else:
+            return False
+
+    def kill(self):
+        """Usuń organizm z listy organizmów i ukryj go"""
+
+        self.__hide()
+        self._WORLD_HANDLE.kill_organism(self)
+
+    def make_child(self):
+        """zrob kopje organizmu"""
+
+
+
+
+
+
+
+

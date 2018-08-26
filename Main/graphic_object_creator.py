@@ -3,8 +3,8 @@ from math import floor
 
 class GraphicObjectCreator:
 
-    def __init__(self, window_handle):
-        self.__Height = window_handle.getHeight()
+    def __init__(self, window_height):
+        self.__Height = window_height
 
     def __convert_y_coordinate(self, y):
         """przekształca podaną koortynate y do kartezjańskiego układu współżędnych
